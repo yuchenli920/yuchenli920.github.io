@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuchen Li</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Poppins:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFF1FA;
+    --paper-2: #E4E8F7;
+    --ink: #23264A;
+    --coral: #FF6B5C;
+    --teal: #33B7A6;
+    --yellow: #FFC857;
+    --lilac: #B8A8F0;
+    --tape: rgba(255, 200, 87, 0.55);
+    --shadow: rgba(35, 38, 74, 0.18);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(184,168,240,0.25), transparent 40%),
+      radial-gradient(circle at 92% 85%, rgba(51,183,166,0.18), transparent 45%),
+      var(--paper);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  /* subtle paper grain via layered dots */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(35,38,74,0.035) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 0 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  nav .logo { font-weight: 700; }
+  nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+  nav a { text-decoration: none; position: relative; }
+  nav a::after {
+    content: "";
+    position: absolute; left: 0; bottom: -4px;
+    width: 0; height: 2px; background: var(--coral);
+    transition: width 0.25s ease;
+  }
+  nav a:hover::after { width: 100%; }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 60px 0 70px;
+  }
+  .hero .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    background: var(--yellow);
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 100px;
+    transform: rotate(-2deg);
+    margin-bottom: 18px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .hero h1 {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: clamp(52px, 8vw, 84px);
+    line-height: 1;
+    margin: 0 0 14px;
+  }
+  .hero h1 span { color: var(--coral); }
+  .hero p.lead {
+    font-size: 17px;
+    max-width: 440px;
+    color: #45496e;
+  }
+  .hero .actions { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid var(--ink);
+    display: inline-block;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-solid { background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 var(--coral); }
+  .btn-outline { background: transparent; box-shadow: 4px 4px 0 var(--teal); }
+  .btn:hover { transform: translate(-2px,-2px); }
+
+  .hero-photo { position: relative; display: flex; justify-content: center; }
+  .polaroid {
+    background: white;
+    padding: 14px 14px 44px;
+    border-radius: 4px;
+    box-shadow: 0 18px 30px var(--shadow);
+    transform: rotate(4deg);
+    width: 260px;
+  }
+  .polaroid img { width: 100%; display: block; border-radius: 2px; }
+  .polaroid .cap {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--ink);
+  }
+  .sticker-age {
+    position: absolute;
+    top: -18px; right: 6px;
+    width: 78px; height: 78px;
+    border-radius: 50%;
+    background: var(--coral);
+    color: white;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'Space Mono', monospace;
+    box-shadow: 3px 3px 0 var(--ink);
+    transform: rotate(10deg);
+  }
+  .sticker-age b { font-size: 26px; line-height: 1; font-family: 'Poppins',sans-serif; }
+  .sticker-age small { font-size: 9px; letter-spacing: 1px; }
+
+  /* SECTION LABELS */
+  .section { padding: 50px 0; position: relative; }
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tag::before { content: "?"; }
+  .section h2 {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(34px, 5vw, 46px);
+    margin: 0 0 24px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .fact-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 8px 0 var(--paper-2), 0 10px 20px var(--shadow);
+    position: relative;
+  }
+  .fact-card .tape-strip {
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    width: 60px; height: 20px; background: var(--tape);
+  }
+  .fact-card h3 { margin: 4px 0 6px; font-size: 16px; }
+  .fact-card p { margin: 0; font-size: 14px; color: #55597e; }
+
+  /* GALLERY */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px 16px;
+    margin-top: 10px;
+  }
+  .gallery .polaroid { width: 100%; }
+  .gallery .polaroid:nth-child(1) { transform: rotate(-4deg); }
+  .gallery .polaroid:nth-child(2) { transform: rotate(3deg); margin-top: 22px; }
+  .gallery .polaroid:nth-child(3) { transform: rotate(-2deg); }
+  .gallery .polaroid:nth-child(4) { transform: rotate(5deg); margin-top: 14px; }
+  .gallery .polaroid:hover { transform: rotate(0) scale(1.04); z-index: 2; }
+  .gallery .polaroid { transition: transform 0.25s ease; cursor: default; }
+
+  /* INTERESTS */
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+  .chip {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 100px;
+    border: 2px solid var(--ink);
+    background: white;
+  }
+  .chip:nth-child(3n+1) { background: var(--yellow); }
+  .chip:nth-child(3n+2) { background: #fff; }
+  .chip:nth-child(3n+3) { background: #E4FBF8; }
+
+  /* CONTACT */
+  .contact-card {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 20px;
+    padding: 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-card::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,107,92,0.25), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(51,183,166,0.25), transparent 50%);
+  }
+  .contact-card h2 { color: white; position: relative; }
+  .contact-card p { position: relative; color: #c8cbe8; }
+  .contact-card .btn-solid { background: var(--coral); color: var(--ink); border-color: var(--coral); box-shadow: 4px 4px 0 var(--yellow); position: relative; }
+
+  footer {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: #7c80a3;
+    padding-top: 40px;
+  }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; text-align: center; }
+    .hero p.lead { margin: 0 auto; }
+    .hero .actions { justify-content: center; }
+    .about-grid { grid-template-columns: 1fr 1fr; }
+    .gallery { grid-template-columns: 1fr 1fr; }
+    .gallery .polaroid:nth-child(n) { margin-top: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--coral);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="logo">Y. LI</div>
+    <ul>
+      <li><a href="#about">Über mich</a></li>
+      <li><a href="#gallery">Bilder</a></li>
+      <li><a href="#interests">Interessen</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">? willkommen auf meiner seite</span>
+      <h1>Hi, ich bin<br><span>Yuchen Li</span> ??</h1>
+      <p class="lead">Das hier ist meine kleine Ecke im Internet — noch im Aufbau, aber schon mit Herz eingerichtet. Schau dich um!</p>
+      <div class="actions">
+        <a href="#about" class="btn btn-solid">Mehr über mich</a>
+        <a href="#contact" class="btn btn-outline">Kontakt</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="sticker-age"><b>16</b><small>JAHRE</small></div>
+      <div class="polaroid">
+        <img src="https://placehold.co/400x480/D8DCF5/23264A?text=Foto+folgt" alt="Platzhalterbild von Yuchen">
+        <div class="cap">das bin ich :)</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="tag">Steckbrief</div>
+    <h2>Ein bisschen über mich</h2>
+    <div class="about-grid">
+      <div class="fact-card">
+        <div class="tape-strip"></div>
+        <h3>Name</h3>
+        <p>Yuchen Li</p>
+      </div>
+      <div class="fact-card">
+        <div class="tape-strip"></div>
+        <h3>Alter</h3>
+        <p>16 Jahre</p>
+      </div>
+      <div class="fact-card">
+        <div class="tape-strip"></div>
+        <h3>Motto</h3>
+        <p>Wird noch ergänzt ??</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <div class="tag">Bildergalerie</div>
+    <h2>Ein paar Schnappschüsse</h2>
+    <div class="gallery">
+      <div class="polaroid">
+        <img src="https://placehold.co/300x340/FFE3A3/23264A?text=Bild+1" alt="Platzhalterbild 1">
+        <div class="cap">Moment 1</div>
+      </div>
+      <div class="polaroid">
+        <img src="https://placehold.co/300x340/BFE9E1/23264A?text=Bild+2" alt="Platzhalterbild 2">
+        <div class="cap">Moment 2</div>
+      </div>
+      <div class="polaroid">
+        <img src="https://placehold.co/300x340/D8CDF7/23264A?text=Bild+3" alt="Platzhalterbild 3">
+        <div class="cap">Moment 3</div>
+      </div>
+      <div class="polaroid">
+        <img src="https://placehold.co/300x340/FFD0C7/23264A?text=Bild+4" alt="Platzhalterbild 4">
+        <div class="cap">Moment 4</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="interests">
+    <div class="tag">Was mich ausmacht</div>
+    <h2>Interessen &amp; Vorlieben</h2>
+    <div class="chips">
+      <span class="chip">?? Gaming</span>
+      <span class="chip">?? Musik</span>
+      <span class="chip">?? Lesen</span>
+      <span class="chip">?? Kreativ sein</span>
+      <span class="chip">? Sport</span>
+      <span class="chip">?? Technik</span>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="contact-card">
+      <h2>Lass uns in Kontakt bleiben</h2>
+      <p>Schreib mir gerne, wenn du mehr über mich erfahren möchtest.</p>
+      <a href="mailto:hallo@beispiel.de" class="btn btn-solid">? E-Mail schreiben</a>
+    </div>
+  </section>
+
+  <footer>© 2026 Yuchen Li — gebaut mit ? und ?</footer>
+</div>
+</body>
+</html>
+
+
+
+
